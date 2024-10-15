@@ -1,0 +1,17 @@
+/config/*
+/stats/*
+/templates/*
+/observability-rest-server*
+/setup-code.txt
+/*-linux-arm64
+/*-linux-amd64
+/*-darwin-arm64
+/*-darwin-amd64
+/*.pid
+/secrets/*
+/webapp/.vite/
+/docs-build
+.DS_Store
+/*.sha256
+/provisioning/whitelist.pkr.hcl
+.env
