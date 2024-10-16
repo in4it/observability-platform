@@ -87,3 +87,13 @@ func (kv KeyValueInt) Less(i, j int) bool {
 func (kv KeyValueInt) Swap(i, j int) {
 	kv[i], kv[j] = kv[j], kv[i]
 }
+
+type LogConfig struct {
+	PatternDefinitions []PatternDefinition `json:"patternDefinitions"`
+}
+
+type PatternDefinition struct {
+	Name     string            `json:"name"`
+	Tags     []KeyValue        `json:"tags"`
+	Patterns map[string]string `json:"patterns"`
+}
