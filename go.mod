@@ -19,11 +19,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.32.2 // indirect
 	github.com/aws/smithy-go v1.22.0 // indirect
 	github.com/beevik/etree v1.4.1 // indirect
+	github.com/elastic/go-grok v0.3.1 // indirect
 	github.com/go-jose/go-jose/v4 v4.0.4 // indirect
 	github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/in4it/go-devops-platform v0.1.1-0.20241015201149-20da0ccd1259 // indirect
 	github.com/jonboulle/clockwork v0.4.0 // indirect
+	github.com/magefile/mage v1.15.0 // indirect
 	github.com/mattermost/xml-roundtrip-validator v0.1.0 // indirect
 	github.com/russellhaering/gosaml2 v0.9.1 // indirect
 	github.com/russellhaering/goxmldsig v1.4.0 // indirect

@@ -8,6 +8,7 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/elastic/go-grok"
 	"github.com/in4it/go-devops-platform/storage"
 )
 
@@ -27,6 +28,7 @@ type Observability struct {
 	ActiveBufferWriters   sync.WaitGroup
 	WriteLock             sync.Mutex
 	MaxBufferSize         int
+	GrokPatterns          map[string]*grok.Grok
 }
 
 type ConcurrentRWBuffer struct {
@@ -86,4 +88,14 @@ func (kv KeyValueInt) Less(i, j int) bool {
 }
 func (kv KeyValueInt) Swap(i, j int) {
 	kv[i], kv[j] = kv[j], kv[i]
+}
+
+type LogConfig struct {
+	PatternDefinitions []PatternDefinition `json:"patternDefinitions"`
+}
+
+type PatternDefinition struct {
+	Name     string            `json:"name"`
+	Tags     []KeyValue        `json:"tags"`
+	Patterns map[string]string `json:"patterns"`
 }
