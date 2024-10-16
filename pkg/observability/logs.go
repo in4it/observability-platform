@@ -15,6 +15,11 @@ func (o *Observability) getLogs(fromDate, endDate time.Time, pos int64, maxLogLi
 		Tags:       KeyValueInt{},
 	}
 
+	patternDefinitions, err := getPatternDefinitions(o.Storage)
+	if err != nil {
+		return logEntryResponse, fmt.Errorf("get pattern definitions error: %s", err)
+	}
+
 	keys := make(map[KeyValue]int)
 
 	logFiles := []string{}
@@ -78,6 +83,13 @@ func (o *Observability) getLogs(fromDate, endDate time.Time, pos int64, maxLogLi
 						}
 					}
 					if !filterMessage {
+						// check if we need to apply grok filter
+						for _, patternDefinition := range patternDefinitions {
+							if logEntryHasTags(patternDefinition.Tags, tags) { // apply grok filter
+
+							}
+						}
+						// add log entry
 						logEntry := LogEntry{
 							Timestamp: timestamp.Format(TIMESTAMP_FORMAT),
 							Data:      logline,
@@ -113,4 +125,22 @@ func (o *Observability) getLogs(fromDate, endDate time.Time, pos int64, maxLogLi
 	sort.Sort(logEntryResponse.Tags)
 
 	return logEntryResponse, nil
+}
+
+func logEntryHasTags(a []KeyValue, b []KeyValue) bool {
+	tags := make([]bool, len(b))
+	for _, a1 := range a {
+		for k, b1 := range b {
+			if b1.Key == a1.Key && b1.Value == a1.Value {
+				tags[k] = true
+				break
+			}
+		}
+	}
+	for _, v := range tags {
+		if !v {
+			return false
+		}
+	}
+	return len(tags) > 0
 }

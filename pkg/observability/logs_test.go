@@ -94,3 +94,82 @@ func TestKeyValue(t *testing.T) {
 		t.Fatalf("wrong output: %s", out)
 	}
 }
+
+func TestLogEntryHasTags1(t *testing.T) {
+	a := []KeyValue{
+		{
+			Key:   "a",
+			Value: "b",
+		},
+	}
+	b := []KeyValue{
+		{
+			Key:   "a",
+			Value: "b",
+		},
+	}
+	res := logEntryHasTags(a, b)
+	if !res {
+		t.Fatalf("res is false")
+	}
+}
+
+func TestLogEntryHasTags2(t *testing.T) {
+	a := []KeyValue{
+		{
+			Key:   "a",
+			Value: "b",
+		},
+	}
+	b := []KeyValue{}
+	res := logEntryHasTags(a, b)
+	if res {
+		t.Fatalf("res is true")
+	}
+}
+
+func TestLogEntryHasTags3(t *testing.T) {
+	a := []KeyValue{
+		{
+			Key:   "a",
+			Value: "b",
+		},
+	}
+	b := []KeyValue{
+		{
+			Key:   "a",
+			Value: "c",
+		},
+	}
+	res := logEntryHasTags(a, b)
+	if res {
+		t.Fatalf("res is true")
+	}
+}
+
+func TestLogEntryHasTags4(t *testing.T) {
+	a := []KeyValue{
+		{
+			Key:   "a",
+			Value: "b",
+		},
+		{
+			Key:   "b",
+			Value: "c",
+		},
+	}
+	b := []KeyValue{
+		{
+			Key:   "b",
+			Value: "c",
+		},
+		{
+			Key:   "a",
+			Value: "b",
+		},
+	}
+	res := logEntryHasTags(a, b)
+	if !res {
+		t.Fatalf("res is false")
+	}
+}

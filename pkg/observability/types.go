@@ -8,6 +8,7 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/elastic/go-grok"
 	"github.com/in4it/go-devops-platform/storage"
 )
 
@@ -27,6 +28,7 @@ type Observability struct {
 	ActiveBufferWriters   sync.WaitGroup
 	WriteLock             sync.Mutex
 	MaxBufferSize         int
+	GrokPatterns          map[string]*grok.Grok
 }
 
 type ConcurrentRWBuffer struct {
